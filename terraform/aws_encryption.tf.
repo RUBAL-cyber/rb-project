@@ -1,0 +1,60 @@
+##########################################################
+# Step 3 — Encryption for RB Visual Store
+# Includes:
+# 1. S3 Bucket Encryption
+# 2. EBS Volume Encryption
+# 3. RDS Database Encryption
+##########################################################
+
+# 1️ Random ID for unique S3 bucket name
+resource "random_id" "app_bucket_id" {
+  byte_length = 4
+}
+
+# 2️ S3 Bucket with server-side encryption
+resource "aws_s3_bucket" "app_bucket" {
+  bucket = "rb-app-bucket-${random_id.app_bucket_id.hex}"
+
+  server_side_encryption_configuration {
+    rule {
+      apply_server_side_encryption_by_default {
+        sse_algorithm = "AES256"
+      }
+    }
+  }
+
+  tags = {
+    Name = "rb-app-s3-encrypted"
+  }
+}
+
+#  EBS Volume Encryption
+resource "aws_ebs_volume" "app_volume" {
+  availability_zone = "us-east-1a"
+  size              = 8
+  encrypted         = true
+
+  tags = {
+    Name = "rb-app-ebs"
+  }
+}
+
+#  RDS Database Encryption
+resource "aws_db_instance" "app_db" {
+  allocated_storage    = 20
+  engine               = "mysql"
+  engine_version       = "8.0"
+  instance_class       = "db.t3.micro"
+  name                 = "rbdb"
+  username             = "admin"
+  password             = "YourPassword123!" # Replace with a secure password
+  db_subnet_group_name = aws_db_subnet_group.app_subnet.id
+  vpc_security_group_ids = [aws_security_group.web_sg.id]
+
+  storage_encrypted   = true
+  publicly_accessible = false
+
+  tags = {
+    Name = "rb-app-db-encrypted"
+  }
+}

@@ -1,0 +1,7 @@
+node_modules/
+.terraform/
+terraform/.terraform/
+*.log
+.env
+.github/workflows/temp
+.github/workflows/temp

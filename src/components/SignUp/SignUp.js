@@ -1,8 +1,10 @@
 import React, { useState } from "react";
 import "./SignUp.css";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 const SignUp = () => {
+    const navigate = useNavigate();
     const [ error,setError ] = useState('')
+    const [ success,setSuccess ] = useState('')
     const [ userDetails,setuserDetails ] = useState({
         name: '',
         email:'',
@@ -25,19 +27,37 @@ const SignUp = () => {
         }
         if(userDetails.password !== userDetails.confirm_password){
             setError('Passwords do not match')
+            setSuccess('')
             return
         }
 
-        console.log(userDetails)
+        const users = JSON.parse(localStorage.getItem('users') || '[]');
+
+        if(users.some((u) => u.email.toLowerCase() === userDetails.email.toLowerCase())){
+            setError('An account with this email already exists')
+            setSuccess('')
+            return
+        }
+
+        users.push({
+            name: userDetails.name,
+            email: userDetails.email.toLowerCase(),
+            password: userDetails.password
+        });
+
+        localStorage.setItem('users', JSON.stringify(users));
+
+        setSuccess('Sign up successful. You can sign in now.');
+        setError('');
+
         setuserDetails({
             name: '',
             email:'',
             password:'',
             confirm_password: ''
         })
-        setError('')
-        
 
+        setTimeout(() => navigate('/sign-in'), 900);
     }
 
   return (
@@ -45,6 +65,7 @@ const SignUp = () => {
     
     <form onSubmit={handleSubmit} className="sign-up-container">
         <p className="error-paragraph">{error !== '' ? `Error: ${error}` : null}</p>
+        <p className="success-paragraph">{success !== '' ? success : null}</p>
         <h3>Sign up</h3>
         <div className="inputs">
 
@@ -71,7 +92,7 @@ const SignUp = () => {
             <label htmlFor="password">
                 password
             </label>
-            <input name="password" id="password" type="text"  
+            <input name="password" id="password" type="password"  
             onChange={handleOnchange}
             value={userDetails.password}
             />

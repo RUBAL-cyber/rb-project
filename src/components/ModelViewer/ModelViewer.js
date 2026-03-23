@@ -4,7 +4,6 @@ import LazyLoad from "react-lazyload";
 import QRCode from "qrcode.react";
 import Help from "./Help";
 const ModelViewer = ({ item, addToWishlist, removeFromWishlist, wishlist }) => {
-  const [selectedVariant, setSelectedVariant] = useState('default');
   const [display, setDisplay] = useState(false);
   const [ARSupported, setARSupported] = useState(false);
   const [annotate, setAnnotate] = useState(false);
@@ -26,8 +25,6 @@ const ModelViewer = ({ item, addToWishlist, removeFromWishlist, wishlist }) => {
   // Accessing varient selections element
   const varient = useRef(null);
 
-  console.log(item)
-
   function toggle() {
     if (!document.fullscreenElement) {
       model.current.requestFullscreen();
@@ -37,9 +34,8 @@ const ModelViewer = ({ item, addToWishlist, removeFromWishlist, wishlist }) => {
 
 
   const handleAnnotateClick = (annotation) => {
-    const { orbit, target, position } = annotation;
-    model.current.cameraTarget = position;
-    model.current.orbit = target
+    model.current.cameraTarget = annotation.position;
+    model.current.orbit = annotation.orbit;
   }
 
   useEffect(() => {
@@ -61,9 +57,7 @@ const ModelViewer = ({ item, addToWishlist, removeFromWishlist, wishlist }) => {
     const modelViewer = model.current
     modelViewer &&
     modelViewer.addEventListener('load', () => {
-      console.log('loaded')
       const availableVariants = modelViewer?.availableVariants;
-      console.log(availableVariants)
       for (const variant of availableVariants) {
         const option = document.createElement('option');
         option.value = variant;
@@ -189,14 +183,14 @@ const ModelViewer = ({ item, addToWishlist, removeFromWishlist, wishlist }) => {
               <div className="rating-sec">
                 <div>Rating</div>
                 <div>
-                  <span className="star">&#9733;</span>
-                  <span className="star">&#9733;</span>
-                  <span className="star">&#9733;</span>
-                  <span>&#9733;</span>
-                  <span>&#9733;</span>
+                  {[...Array(5)].map((_, i) => (
+                    <span key={i} className="star">
+                      {i < (item.rating || 4) ? "★" : "☆"}
+                    </span>
+                  ))}
                 </div>
               </div>
-              <div>$. 1000</div>
+              <div>Rs. {item.price || 1000}</div>
               {!ARSupported && <h5>Scan the QR code for AR View on mobile</h5>}
             </div>
             <button className="add-icon" onClick={handleAddToWishlist}>

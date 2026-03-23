@@ -7,67 +7,86 @@ const Feedback = () => {
   const formRef = useRef(null);
 
   useEffect(() => {
-    const script1 = document.createElement("script");
-    script1.src = "https://smtpjs.com/v3/smtp.js";
-    script1.async = true;
-    document.body.appendChild(script1);
-
-    const script2 = document.createElement("script");
-    script2.src = "https://unpkg.com/sweetalert/dist/sweetalert.min.js";
-    script2.async = true;
-    document.body.appendChild(script2);
+    const script = document.createElement("script");
+    script.src = "https://unpkg.com/sweetalert/dist/sweetalert.min.js";
+    script.async = true;
+    document.body.appendChild(script);
 
     return () => {
-      document.body.removeChild(script1);
-      document.body.removeChild(script2);
+      document.body.removeChild(script);
     };
   }, []);
 
-  const sendMail = () => {
-    let likes = document.getElementById("liked").value;
-    let usersname = document.getElementById("username").value;
-    let usersemail = document.getElementById("useremail").value;
-    let improvement = document.getElementById("improve").value;
-    let feature = document.getElementById("features").value;
-    let comment = document.getElementById("comments").value;
+  const sendMail = async () => {
+    const likes = document.getElementById("liked").value;
+    const usersname = document.getElementById("username").value;
+    const usersemail = document.getElementById("useremail").value;
+    const improvement = document.getElementById("improve").value;
+    const feature = document.getElementById("features").value;
+    const comment = document.getElementById("comments").value;
 
-    let body = "Name of the User: <br/>" + usersname + "<br/>" + "Email of the User: <br/>" + usersemail + "<br/><br/>" +
-      "What did you like most about RB-VisualStore? <br/>" +
-      likes +
-      "<br/><br/> Will our 3D and AR features improve your shopping experience if we integrate it on an online e-commerce store ?<br/>" +
-      improvement +
-      "<br/><br/> What are the other features that excite you to have them on AR-Webstore ?<br/>" +
-      feature +
-      "<br/> <br/>Any other comments?<br/>" +
-      comment;
+    // Validate required fields
+    if (!usersname || !usersemail || !comment) {
+      window.swal(
+        "Validation Error",
+        "Please fill in all required fields (Name, Email, Comments)",
+        "error"
+      );
+      return;
+    }
 
-    console.log(body);
+    const templateParams = {
+      from_name: usersname,
+      from_email: usersemail,
+      likes: likes,
+      improvement: improvement,
+      feature: feature,
+      comments: comment,
+    };
 
-    window.Email.send({
-      Host: "smtp.elasticemail.com",
-      Username: "RUBAL@gmail.com",
-      Password: "BAAF238142FDFE27699F12B3FC14B1A5C9F7",
-      To: "RUBAL@gmail.com",
-      From: "RUBAL@gmail.com",
-      Subject: "RB-VisualStore has got a feedback",
-      Body: body,
-    }).then((message) => {
-        if (message === "OK") {
-          window.swal(
-            "Successfull",
-            "Thanks! We've received your feedback",
-            "success"
-          ).then(() => {
-            formRef.current.reset(); 
-          });
-        } else {
-          window.swal(
-            "Something Wrong",
-            "Your FeedBack is not Received",
-            "error"
-          );
-        }
+    try {
+      const response = await fetch('/api/feedback', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify(templateParams),
       });
+
+    try {
+      const response = await fetch('/api/feedback', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify(templateParams),
+      });
+
+      const data = await response.json();
+
+      if (data.success) {
+        window.swal(
+          "Success",
+          "Thanks! We've received your feedback",
+          "success"
+        ).then(() => {
+          formRef.current.reset();
+        });
+      } else {
+        window.swal(
+          "Error",
+          data.message || "Failed to send feedback. Please try again.",
+          "error"
+        );
+      }
+    } catch (error) {
+      console.error('Feedback submission error:', error);
+      window.swal(
+        "Network Error",
+        "Please check your connection and try again.",
+        "error"
+      );
+    }
   };
 
   return (

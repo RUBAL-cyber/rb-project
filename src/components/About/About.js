@@ -1,13 +1,13 @@
 import "./About.css";
 import React, { useEffect } from "react";
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faArrowUp } from '@fortawesome/free-solid-svg-icons';
 import tick from './tick.png';
 import archery from './archery.png';
-import gun from './rightimg3.png';
-import img1 from './prob1.jpg';
-import img2 from './prob2.jpg';
-import res1 from './resource1.png';
+import gun from './rightimg3.png'
+import img1 from './prob1.jpg'
+import img2 from './prob2.jpg'
+import res1 from './resource1.png'
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
+import { faArrowUp} from '@fortawesome/free-solid-svg-icons'
 
 const About = () => {
     useEffect(() => {
@@ -52,16 +52,39 @@ const About = () => {
             {/* Banner Section */}
             <div className="about-banner">
                 <div className="about-banner-front">
+<<<<<<< HEAD
                     <div className="aboutleft">
                         <div className="aboutleftsec fromtop-anim">RB Webstore</div>
                         <p className="abouleftseccont fade-effect">
                             A web application for immersive augmented reality shopping experiences.
                         </p>
+=======
+                    <div className="aboutleft"><div className="aboutleftsec fromtop-anim">AR Webstore</div>
+                        <p className="abouleftseccont fade-effect">A web application for immersive augmented reality shopping experiences.</p></div>
+
+                    <img src={gun} className="aboutrightsec" alt="AR Webstore illustration" />
+
+
+                </div>
+
+            </div>
+            <div>
+                <h1 className="second-head fromtop-anim">Why AR WEBSTORE ?</h1>
+                <div className="prob-box">
+                    <img src={img1} className="prob-img left-img-effect" alt="Traditional e-commerce problem illustration" />
+                    <div className="about-prob fade-effect">
+                        <p className="about-prob-header"><i>Problem</i></p>
+                        <p className="about-prob-sol">Traditional e-commerce platforms fail to deliver immersive product experiences,
+                            leaving customers uncertain about the look, fit, and functionality of items. This lack of
+                            visualization leads to higher return rates as products may not meet expectations. Additionally,
+                            customer engagement suffers due to the limited ability to interact with and explore products online.</p>
+>>>>>>> 941c9c0 (Implement SMTP email system and fix website issues)
                     </div>
                     <img src={gun} className="aboutrightsec" alt="AR shopping" />
                 </div>
             </div>
 
+<<<<<<< HEAD
             {/* Why RB Webstore */}
             <h1 className="second-head fromtop-anim">Why RB WEBSTORE ?</h1>
             <div className="prob-box">
@@ -74,6 +97,16 @@ const About = () => {
                         visualization leads to higher return rates as products may not meet expectations. Additionally,
                         customer engagement suffers due to the limited ability to interact with and explore products online.
                     </p>
+=======
+                    <div className="about-prob fade-effect">
+                        <p className="about-prob-header" style={{ "padding": "1vh", "width": "70%" }}><i>Solution</i></p>
+                        <p className="about-prob-sol2"> With AR-Webstore,customers can visualize products
+                            in their own spaces and view all the virtual features more clearly. This empowers
+                            customers to make informed decisions, reduces return rates, and enhances
+                            engagement, resulting in a more satisfying and immersive shopping journey.</p>
+                    </div>
+                    <img src={img2} className="prob-img2 right-img-effect" alt="AR Webstore solution illustration" />
+>>>>>>> 941c9c0 (Implement SMTP email system and fix website issues)
                 </div>
             </div>
 
@@ -92,6 +125,7 @@ const About = () => {
             {/* Status & Goals */}
             <div className="about-goals-box">
                 <div className="status fade-effect">
+<<<<<<< HEAD
                     <h1 className="status-header fromtop-anim" style={{ color: "rgb(19, 227, 19)" }}>Current Status</h1>
                     {[ 
                         "E-commerce products with 3D models for 360° viewing",
@@ -105,6 +139,21 @@ const About = () => {
                             <p className="status-points fromtop-anim">{text}</p>
                         </div>
                     ))}
+=======
+                    <h1 className="status-header fromtop-anim" style={{ "color": " rgb(19, 227, 19)" }}>Current Status</h1>
+                    <div style={{ "display": "flex" }}><img style={{ "height": "40px", "display": "block", "margin": "4vh 2vh 0 0" }} src={tick} className="fromtop-anim" alt="Completed feature" /><p className="status-points fromtop-anim">E-commerce products with 3D models for 360° viewing</p></div>
+                    <div style={{ "display": "flex" }}><img style={{ "height": "40px", "display": "block", "margin": "4vh 2vh 0 0" }} src={tick} className="fromtop-anim" alt="Completed feature" /><p className="status-points fromtop-anim">Photorealistic 3D models for immersive shopping experiences.</p></div>
+                    <div style={{ "display": "flex" }}><img style={{ "height": "40px", "display": "block", "margin": "4vh 2vh 0 0" }} src={tick} className="fromtop-anim" alt="Completed feature" /><p className="status-points fromtop-anim">360° viewer for detailed inspection of chairs, frames, and cars.</p></div>
+                    <div style={{ "display": "flex" }}><img style={{ "height": "40px", "display": "block", "margin": "4vh 2vh 0 0" }} src={tick} className="fromtop-anim" alt="Completed feature" /><p className="status-points fromtop-anim">Explore products in your space using augmented reality.</p></div>
+                    <div style={{ "display": "flex" }}><img style={{ "height": "40px", "display": "block", "margin": "4vh 2vh 0 0" }} src={tick} className="fromtop-anim" alt="Completed feature" /><p className="status-points fromtop-anim">Augmented reality for in-home product exploration.</p></div>
+                </div>
+                <div className="status fade-effect">
+                    <h1 className="status-header fromtop-anim" style={{ "color": "rgb(9, 16, 250)" }}>Future Goals</h1>
+                    <div style={{ "display": "flex" }}><img style={{ "height": "40px", "display": "block", "margin": "4vh 2vh 0 0" }} src={archery} className="fromtop-anim" alt="Future goal" /><p className="status-points fromtop-anim">Build an e-commerce platform providing an immersive shopping experience.</p></div>
+                    <div style={{ "display": "flex" }}><img style={{ "height": "40px", "display": "block", "margin": "4vh 2vh 0 0" }} src={archery} className="fromtop-anim" alt="Future goal" /><p className="status-points fromtop-anim">Make the products interactive in a real environment rather than just demonstrating static
+                        3D models using ML-AI.</p></div>
+
+>>>>>>> 941c9c0 (Implement SMTP email system and fix website issues)
                 </div>
 
                 <div className="status fade-effect">
@@ -168,6 +217,14 @@ const About = () => {
                     </ul>
                 </div>
             </div>
+<<<<<<< HEAD
+=======
+            <div><h1 className="second-head fromtop-anim">Project Admin</h1>
+                <a href="https://github.com/ShwetKhatri2001"><div className="about-admin-box fade-effect"><img className="about-admin-img" src="https://avatars.githubusercontent.com/u/56475750?v=4" alt="Shwet Khatri's GitHub avatar" /><p className="about-admin">Shwet Khatri</p></div></a></div>
+            <div><h1 className="second-head fromtop-anim" style={{ "marginTop": "13vh" }}>Contributors</h1>
+                <p className="second-head fromtop-anim" style={{ "color": "blue" }}><b>Credits go to these contributors:</b></p>
+                <ContributorSection />
+>>>>>>> 941c9c0 (Implement SMTP email system and fix website issues)
 
             {/* Project Admin */}
             <div>

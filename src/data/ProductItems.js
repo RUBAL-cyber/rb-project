@@ -19,6 +19,8 @@ const productItems = [
     iOSSrc: ioschair,
     category: "Furniture",
     color: "Orange",
+    price: 1000,
+    rating: 4,
     annotations: [
       {
         title: "comfortable-back",
@@ -44,6 +46,8 @@ const productItems = [
     iOSSrc: OfficeChairUsdz,
     category: "Furniture",
     color: "black",
+    price: 1200,
+    rating: 5,
     annotations: [
       {
         title: "comfortable-back",
@@ -69,6 +73,8 @@ const productItems = [
     iOSSrc: potUsdz,
     category: "Environment",
     color: "Red",
+    price: 300,
+    rating: 4,
     annotations: [
       {
         title: "pot-structure",
@@ -87,6 +93,8 @@ const productItems = [
     iOSSrc: iospainting,
     category: "Art",
     color: "Brown",
+    price: 800,
+    rating: 4,
     annotations: [
       {
         title: "wooden-frame",
@@ -112,6 +120,8 @@ const productItems = [
     iOSSrc: ioscar,
     category: "Vehicle",
     color: "Blue",
+    price: 50000,
+    rating: 5,
     annotations: [
       {
         title: "plastic-structure",
@@ -137,6 +147,8 @@ const productItems = [
     iOSSrc: ioscar1,
     category: "Vehicle",
     color: "Red",
+    price: 75000,
+    rating: 5,
     annotations: [
       {
         title: "plastic-structure",

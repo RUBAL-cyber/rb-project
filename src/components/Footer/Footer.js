@@ -1,12 +1,47 @@
-import React from "react";
+import React, { useState } from "react";
 import { Link } from "react-router-dom";
 import "./Footer.css";
 
 function Footer() {
+  const [email, setEmail] = useState("");
+  const [message, setMessage] = useState("");
+
+  const handleSubmit = async (event) => {
+    event.preventDefault();
+    if (!email) {
+      setMessage("Please enter a valid email address.");
+      return;
+    }
+
+    try {
+      const response = await fetch('/api/newsletter', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({ email }),
+      });
+
+      const data = await response.json();
+
+      if (data.success) {
+        setMessage("Thank you for subscribing!");
+        setEmail("");
+      } else {
+        setMessage(data.message || "Failed to subscribe. Please try again.");
+      }
+    } catch (error) {
+      console.error('Newsletter signup error:', error);
+      setMessage("Network error. Please check your connection and try again.");
+    }
+
+    setTimeout(() => setMessage(""), 5000);
+  };
+
   return (
     <div className="contact" id="contact">
       <div className="main-content">
-        <div class="contact-content">
+        <div className="contact-content">
           <Link to="/"> Home </Link>
           <Link
             to="/about"
@@ -51,16 +86,18 @@ function Footer() {
       </div>
 
       <div class="action">
-        <form onSubmit={(event) => event.preventDefault()}>
+        <form onSubmit={handleSubmit}>
           <input
             type="email"
             name="email"
             placeholder="Your Email"
+            value={email}
+            onChange={(e) => setEmail(e.target.value)}
             required
-          ></input>
-          <input type="submit" name="submit" value="Submit" required></input>
-        
+          />
+          <input type="submit" name="submit" value="Submit" />
         </form>
+        {message && <p style={{ color: "green", marginTop: "10px" }}>{message}</p>}
       </div>
       <div class="last">
         <p>@ 2023 AR-Website | All Rights Reserved</p>

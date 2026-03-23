@@ -1,0 +1,181 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+    <title>Mango Velvet | AR Webstore</title>
+    <!-- Font Awesome 6 -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Inter:opsz,wght@14..32,300;14..32,400;14..32,500;14..32,600;14..32,700&display=swap" rel="stylesheet">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Inter', sans-serif;
+        }
+
+        body {
+            background: #faf7f2;
+            color: #2c2b28;
+            line-height: 1.4;
+        }
+
+        /* header & navbar */
+        .top-bar {
+            background: #2d2a24;
+            color: #f0ede8;
+            padding: 12px 24px;
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: space-between;
+            align-items: center;
+            gap: 16px;
+        }
+
+        .logo h1 {
+            font-size: 1.6rem;
+            letter-spacing: -0.5px;
+            font-weight: 600;
+        }
+
+        .logo span {
+            font-weight: 400;
+            font-size: 0.9rem;
+            color: #d4af7a;
+        }
+
+        .nav-links {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 20px;
+            align-items: center;
+        }
+
+        .nav-links a {
+            color: #f0ede8;
+            text-decoration: none;
+            font-weight: 500;
+            font-size: 0.95rem;
+            transition: 0.2s;
+            cursor: pointer;
+        }
+
+        .nav-links a:hover, .nav-links .active-nav {
+            color: #e6c394;
+            border-bottom: 2px solid #e6c394;
+            padding-bottom: 4px;
+        }
+
+        /* auth status */
+        .auth-status {
+            display: flex;
+            align-items: center;
+            gap: 16px;
+            background: #3f3a33;
+            padding: 6px 14px;
+            border-radius: 40px;
+        }
+
+        .user-greeting {
+            font-size: 0.85rem;
+            font-weight: 500;
+        }
+
+        .logout-btn {
+            background: none;
+            border: 1px solid #c2a15b;
+            color: #e6c394;
+            padding: 4px 12px;
+            border-radius: 30px;
+            font-size: 0.75rem;
+            font-weight: 500;
+            cursor: pointer;
+            transition: 0.2s;
+        }
+
+        .logout-btn:hover {
+            background: #c2a15b;
+            color: #2d2a24;
+        }
+
+        .container {
+            max-width: 1280px;
+            margin: 30px auto;
+            padding: 0 24px 40px;
+        }
+
+        /* product grid */
+        .product-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+            gap: 32px;
+            margin: 32px 0;
+        }
+
+        .product-card {
+            background: white;
+            border-radius: 28px;
+            overflow: hidden;
+            box-shadow: 0 8px 20px rgba(0,0,0,0.03);
+            transition: all 0.25s ease;
+            border: 1px solid #f0e2d0;
+        }
+
+        .product-card:hover {
+            transform: translateY(-6px);
+            box-shadow: 0 20px 30px -12px rgba(0,0,0,0.1);
+        }
+
+        .product-img {
+            background: #f3ede5;
+            height: 200px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 3.8rem;
+            color: #b4916b;
+        }
+
+        .product-info {
+            padding: 20px 20px 24px;
+        }
+
+        .product-title {
+            font-size: 1.4rem;
+            font-weight: 700;
+            margin-bottom: 6px;
+        }
+
+        .rating {
+            color: #f5b342;
+            letter-spacing: 2px;
+            font-size: 0.85rem;
+            margin: 8px 0;
+        }
+
+        .price {
+            font-weight: 700;
+            font-size: 1.35rem;
+            margin: 10px 0;
+            color: #2c2b28;
+        }
+
+        .qr-note {
+            background: #f4efe8;
+            padding: 10px 12px;
+            border-radius: 48px;
+            font-size: 0.75rem;
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            color: #6b4f2c;
+            margin-top: 8px;
+        }
+
+        /* forms */
+        .form-container {
+            max-width: 520px;
+            margin: 20px auto;
+            background:

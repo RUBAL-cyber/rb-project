@@ -25,7 +25,7 @@ const Feedback = () => {
     const feature = document.getElementById("features").value;
     const comment = document.getElementById("comments").value;
 
-    // Validate required fields
+    // ✅ Validation
     if (!usersname || !usersemail || !comment) {
       window.swal(
         "Validation Error",
@@ -53,15 +53,6 @@ const Feedback = () => {
         body: JSON.stringify(templateParams),
       });
 
-    try {
-      const response = await fetch('/api/feedback', {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-        },
-        body: JSON.stringify(templateParams),
-      });
-
       const data = await response.json();
 
       if (data.success) {
@@ -79,8 +70,9 @@ const Feedback = () => {
           "error"
         );
       }
+
     } catch (error) {
-      console.error('Feedback submission error:', error);
+      console.error("Feedback submission error:", error);
       window.swal(
         "Network Error",
         "Please check your connection and try again.",
@@ -92,42 +84,37 @@ const Feedback = () => {
   return (
     <div className="container">
       <h1>Your Feedback ✍️ Our Evolution 🚀</h1>
+
       <form ref={formRef} onSubmit={(e) => e.preventDefault()}>
-        <label htmlFor="username">Name:</label><br/>
+        <label htmlFor="username">Name:</label><br />
         <input type="text" id="username" placeholder="Your Name..." />
         <br />
 
-        <label htmlFor="useremail">Email:</label><br/>
+        <label htmlFor="useremail">Email:</label><br />
         <input type="text" id="useremail" placeholder="Your Email..." />
         <br />
 
-        <label htmlFor="liked">What did you like most about RB-VisualStore?</label>
-        <input type="text" id="liked" placeholder="I would Like to say..." />
+        <label htmlFor="liked">What did you like most?</label>
+        <input type="text" id="liked" placeholder="I would like to say..." />
         <br />
 
-        <label htmlFor="improve">
-          Will our 3D and AR features improve your shopping experience if we
-          integrate it on an online e-commerce store ?
-        </label>
-        <input type="text" id="improve" placeholder="I would Like to say..." />
+        <label htmlFor="improve">Will AR improve your shopping experience?</label>
+        <input type="text" id="improve" placeholder="I would like to say..." />
         <br />
 
-        <label htmlFor="features">
-          What are the other features that excite you to have them on
-          RB-VisualStore ?
-        </label>
-        <input type="text" id="features" placeholder="I would Like to say..." />
+        <label htmlFor="features">What features excite you?</label>
+        <input type="text" id="features" placeholder="I would like to say..." />
         <br />
 
         <label htmlFor="comments">Any other comments?</label>
         <br />
         <textarea
-          name="message"
           id="comments"
-          placeholder="I would Like to say..."
+          placeholder="I would like to say..."
           style={{ height: "200px" }}
         ></textarea>
         <br />
+
         <button type="button" className="btn" onClick={sendMail}>
           Send Reply
         </button>
